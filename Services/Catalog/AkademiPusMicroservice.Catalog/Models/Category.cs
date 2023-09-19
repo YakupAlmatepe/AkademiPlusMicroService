@@ -1,12 +1,13 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace AkademiPusMicroservice.Catalog.Models
 {
     public class Category
     {
         [BsonId]
-        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)] 
-        public string CategoryId { get; set; }
-        public string CategoryName{ get; set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? CategoryId { get; set; }
+        public string? CategoryName { get; set; }
     }
 }
