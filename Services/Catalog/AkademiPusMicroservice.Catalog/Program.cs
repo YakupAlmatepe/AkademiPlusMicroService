@@ -1,3 +1,9 @@
+using AkademiPusMicroservice.Catalog.Services.CategoryService;
+using AkademiPusMicroservice.Catalog.Services.ProductService;
+using AkademiPusMicroservice.Catalog.Settings;
+using Microsoft.Extensions.Options;
+using System.Reflection;
+
 namespace AkademiPusMicroservice.Catalog
 {
     public class Program
@@ -13,6 +19,17 @@ namespace AkademiPusMicroservice.Catalog
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
+
+            builder.Services.AddSingleton<IDatabaseSettings>(sp =>
+            {
+                return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+            });
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -25,7 +42,6 @@ namespace AkademiPusMicroservice.Catalog
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

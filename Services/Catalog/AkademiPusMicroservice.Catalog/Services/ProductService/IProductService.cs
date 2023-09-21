@@ -7,10 +7,14 @@ namespace AkademiPusMicroservice.Catalog.Services.ProductService
 
     public interface IProductService
     {
-        Task<Response<List<CreateProductDto>>> GetAllProducts();
-        Task<Response<ResultProductDto>> GetCategoryById(string id);
-        Task<Response<NoContent>> CreateCategory(CreateProductDto createProductDto);
-        Task<Response<NoContent>> UpdateCategory(UpdateProductDto updateProductDto);
-        Task<Response<NoContent>> DeleteCategory(string id);
+        Task<Response<List<ResultProductDto>>> GetAllProducts();
+
+        Task<Response<ResultProductDto>> GetByIdProduct(string id);
+
+        Task<Response<NoContent>> CreateProduct(CreateProductDto createProductDto);
+
+        Task<Response<NoContent>> UpdateProduct(UpdateProductDto updateProductDto);
+
+        Task<Response<NoContent>> DeleteProduct(string id);
     }
 }

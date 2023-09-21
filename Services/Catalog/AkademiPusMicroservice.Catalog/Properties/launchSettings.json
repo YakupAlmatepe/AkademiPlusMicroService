@@ -4,17 +4,17 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:47428",
-      "sslPort": 44340
+      "applicationUrl": "http://localhost:55561",
+      "sslPort": 44305
     }
   },
   "profiles": {
-    "AkademiPusMicroservice.Catalog": {
+    "AkademiPlusMikroService.Catalog": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7090;http://localhost:5280",
+      "applicationUrl": "http://localhost:5011",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
