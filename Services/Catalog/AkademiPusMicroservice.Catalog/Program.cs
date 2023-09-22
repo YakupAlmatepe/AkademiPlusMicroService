@@ -1,7 +1,10 @@
 using AkademiPusMicroservice.Catalog.Services.CategoryService;
 using AkademiPusMicroservice.Catalog.Services.ProductService;
 using AkademiPusMicroservice.Catalog.Settings;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
+using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
 
 namespace AkademiPusMicroservice.Catalog
@@ -13,6 +16,18 @@ namespace AkademiPusMicroservice.Catalog
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+
+            //
+            //var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.Authority = builder.Configuration["IdentityServerURL"];
+                options.Audience = "resource_catalog";
+                options.RequireHttpsMetadata = false;
+
+            });
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -40,7 +55,7 @@ namespace AkademiPusMicroservice.Catalog
             }
 
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();
