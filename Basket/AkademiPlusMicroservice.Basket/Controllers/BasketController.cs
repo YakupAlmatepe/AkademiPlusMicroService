@@ -18,7 +18,11 @@ namespace AkademiPlusMicroservice.Basket.Controllers
             _basketService = basketService;
             _sharedIdentityService = sharedIdentityService;
         }
-
+        [HttpGet]
+        public async Task<IActionResult> GetBasket()
+        {
+            return Ok(await _basketService.GetBasket(_sharedIdentityService.GetUserId));
+        }
         [HttpPost]
         public async Task<IActionResult> SaveOrUpdateBasket(BasketDto basketDto)
         {

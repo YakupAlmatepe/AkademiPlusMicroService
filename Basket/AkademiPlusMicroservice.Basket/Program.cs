@@ -15,14 +15,12 @@ namespace AkademiPlusMicroservice.Basket
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            // Add services to the container.
             var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
-
-            // Add services to the container.
-
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
             {
-                opt.Authority = builder.Configuration["IdentityServerURL"];
+                opt.Authority = builder.Configuration["IdentityServerUrl"];
                 opt.Audience = "resource_basket";
                 opt.RequireHttpsMetadata = false;
             });
@@ -30,25 +28,24 @@ namespace AkademiPlusMicroservice.Basket
             {
                 opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
             });
-
-
-
-            // redis i.in
-            builder.Services.AddScoped<ISharedIdentityService,SharedIdentityService>();
-            builder.Services.AddScoped<IBasketService,BasketService>();
-            builder.Services.AddHttpContextAccessor();
-            builder.Services.Configure<RedisSettings>(builder.Configuration.GetSection("RedisSettings"));
-            builder.Services.AddSingleton<RedisService>(sp =>
-            {
-                var redisSettings = sp.GetRequiredService<IOptions<RedisSettings >> ().Value;
-            //    var redis = new RedisService(redisSettings.Host, redisSettings.Port);
-                redis.Connect();
-                return redis;
-            });
-            builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddHttpContextAccessor();
+
+            builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
+            builder.Services.AddScoped<IBasketService, BasketService>();
+
+            builder.Services.Configure<RedisSettings>(builder.Configuration.GetSection("RedisSettings"));
+
+            builder.Services.AddSingleton<RedisService>(sp =>
+            {
+                var redisSettings = sp.GetRequiredService<IOptions<RedisSettings>>().Value;
+                var redis = new RedisService(redisSettings.Host, redisSettings.Port);
+                redis.Connect();
+                return redis;
+            });
+
 
             var app = builder.Build();
 
@@ -58,7 +55,6 @@ namespace AkademiPlusMicroservice.Basket
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
