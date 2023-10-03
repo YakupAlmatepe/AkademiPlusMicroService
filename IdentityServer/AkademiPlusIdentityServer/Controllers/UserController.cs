@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using static IdentityServer4.IdentityServerConstants;
 
@@ -22,20 +23,24 @@ namespace AkademiPlusIdentityServer.Controllers
             _userManager = userManager;
         }
         [HttpPost]
-
         public async Task<IActionResult> SignUp(SingUpDto signUpDto)
         {
             var user = new ApplicationUser()
             {
+                NameSurname = signUpDto.NameSurname,
                 UserName = signUpDto.UserName,
                 Email = signUpDto.Email,
-                NameSurname = signUpDto.NameSurname,
                 City = signUpDto.City
             };
             await _userManager.CreateAsync(user, signUpDto.Password);
 
-            return Ok("Kullanıcı oluşturuldu");
+            return Ok("Kayıt Başarılı Oluşturuldu");
+        }
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            return Ok(users);
         }
     }
 }
-
