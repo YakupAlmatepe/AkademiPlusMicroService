@@ -34,7 +34,7 @@ namespace AkademiPlusMicroservice.Discount
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddControllers(opt =>
             {
-                opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
+                //opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
             });
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
