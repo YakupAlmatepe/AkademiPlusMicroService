@@ -12,55 +12,48 @@ namespace AkademiPusMicroservice.Catalog
     public class Program
     {
         public static void Main(string[] args)
+
         {
-            var builder = WebApplication.CreateBuilder(args);
+			var builder = WebApplication.CreateBuilder(args);
+			builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+			{
+				opt.Authority = builder.Configuration["IdentityServerUrl"];
+				opt.Audience = "resource_catalog";
+				opt.RequireHttpsMetadata = false;
+			});
+			builder.Services.AddControllers();
+			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+			builder.Services.AddEndpointsApiExplorer();
+			builder.Services.AddSwaggerGen();
 
-            // Add services to the container.
+			builder.Services.AddScoped<IProductService, ProductService>();
+			builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+			builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+			builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
+			builder.Services.AddSingleton<IDatabaseSettings>(sp =>
+			{
+				return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
+			});
+
+			var app = builder.Build();
+
+			// Configure the HTTP request pipeline.
+			if (app.Environment.IsDevelopment())
+			{
+				app.UseSwagger();
+				app.UseSwaggerUI();
+			}
 
 
-            //
-            //var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-            //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            {
-                options.Authority = builder.Configuration["IdentityServerURL"];
-                options.Audience = "resource_catalog";
-                options.RequireHttpsMetadata = false;
 
-            });
+			app.UseHttpsRedirection();
+			app.UseAuthentication();
+			app.UseAuthorization();
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+			app.MapControllers();
 
-            builder.Services.AddScoped<IProductService, ProductService>();
-            builder.Services.AddScoped<ICategoryService, CategoryService>();
-            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));
-
-            builder.Services.AddSingleton<IDatabaseSettings>(sp =>
-            {
-                return sp.GetRequiredService<IOptions<DatabaseSettings>>().Value;
-            });
-
-
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.MapControllers();
-
-            app.Run();
-        }
+			app.Run();
+		}
     }
 }

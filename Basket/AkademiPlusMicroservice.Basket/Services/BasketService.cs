@@ -1,5 +1,6 @@
 ﻿using AkademiPlusMicroservice.Basket.DTOs;
-using AkademiPlusMicroService.Shared.Dtos;
+
+using AkademiPlusMicroService.Sharedd.DTOs;
 using System.Text.Json;
 
 namespace AkademiPlusMicroservice.Basket.Services

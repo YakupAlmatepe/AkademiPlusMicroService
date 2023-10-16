@@ -1,6 +1,6 @@
 ﻿using AkademiPlusMicroservice.Basket.DTOs;
 using AkademiPlusMicroservice.Basket.Services;
-using AkademiPlusMicroService.Shared.Services;
+using AkademiPlusMicroService.Sharedd.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

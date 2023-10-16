@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace AkademiPlusMicroService.Order.Core.Domain.Entities
 {
-    public class Address
-    {
-        public int AdressId { get; set; }
-        public string UserId { get; set; }
-        public string Disctrit { get; set; }
-        public string Detail { get; set; }
-        public string City { get; set; }
-    }
+	public class Address
+	{
+		public int AddressId { get; set; }
+		public string UserId { get; set; }
+		public string District { get; set; }
+		public string City { get; set; }
+		public string Detail { get; set; }
+	}
 }
