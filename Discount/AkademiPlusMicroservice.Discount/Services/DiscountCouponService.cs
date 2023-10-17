@@ -1,6 +1,7 @@
 ﻿using AkademiPlusMicroservice.Discount.Context;
 using AkademiPlusMicroservice.Discount.DTOs;
-using AkademiPlusMicroService.Shared.Dtos;
+
+using AkademiPlusMicroService.Sharedd.DTOs;
 using AutoMapper;
 using Dapper;
 using Microsoft.Data.SqlClient;

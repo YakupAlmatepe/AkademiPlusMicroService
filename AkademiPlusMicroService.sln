@@ -61,7 +61,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkademiPlusMicroService.Web
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sharedd", "Sharedd", "{9FDC1D5C-96DE-4D77-9D59-748DF4DE096B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkademiPlusMicroService.Sharedd", "Sharedd\AkademiPlusMicroService.Sharedd\AkademiPlusMicroService.Sharedd.csproj", "{6DBCAFAD-E642-4653-A584-6070A15F2C5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkademiPlusMicroService.Sharedd", "Sharedd\AkademiPlusMicroService.Sharedd\AkademiPlusMicroService.Sharedd.csproj", "{6DBCAFAD-E642-4653-A584-6070A15F2C5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,5 @@
 ﻿using AkademiPlusMicroservice.Discount.DTOs;
-using AkademiPlusMicroService.Shared.Dtos;
+using AkademiPlusMicroService.Sharedd.DTOs;
 
 namespace AkademiPlusMicroservice.Discount.Services
 {

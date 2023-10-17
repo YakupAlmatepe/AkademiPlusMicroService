@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\AkademiPlusMicroService.Shared\AkademiPlusMicroService.Shared.csproj" />
+    <ProjectReference Include="..\..\Sharedd\AkademiPlusMicroService.Sharedd\AkademiPlusMicroService.Sharedd.csproj" />
   </ItemGroup>
 
 </Project>

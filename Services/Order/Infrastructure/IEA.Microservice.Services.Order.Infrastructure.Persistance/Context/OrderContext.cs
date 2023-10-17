@@ -13,7 +13,7 @@ namespace IEA.Microservice.Services.Order.Infrastructure.Persistance.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=localhost,1433;database=AkademiPlusOrderDb;user=sa;password=148951753aA*;");
+            optionsBuilder.UseSqlServer("server=localhost,1433;database=AkademiPlusOrderDb;user=sa;password=123456Aa*;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
