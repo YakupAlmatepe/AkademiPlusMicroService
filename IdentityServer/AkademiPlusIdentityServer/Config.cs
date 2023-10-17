@@ -11,8 +11,8 @@ namespace AkademiPlus.IdentityServer
     public static class Config
     {
         public static IEnumerable<ApiResource> ApiResources =>
-            new ApiResource[]
-            {
+             new ApiResource[]
+             {
                 new ApiResource("resource_catalog"){Scopes={"catalog_fullpermission"}},
                 new ApiResource("resource_discount"){Scopes={"discount_fullpermission"}},
                 new ApiResource("resource_basket"){Scopes={"basket_fullpermission"}},
@@ -22,7 +22,7 @@ namespace AkademiPlus.IdentityServer
                 new ApiResource("resource_payment"){Scopes={"payment_fullpermission"}},
                 new ApiResource("resource_gateway"){Scopes={"gateway_fullpermission"}},
                 new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
-            };
+             };
 
         public static IEnumerable<IdentityResource> IdentityResources =>
                    new IdentityResource[]
