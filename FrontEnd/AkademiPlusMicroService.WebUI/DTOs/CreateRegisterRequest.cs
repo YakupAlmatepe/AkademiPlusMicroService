@@ -1,4 +1,4 @@
-﻿namespace AkademiPlusMicroService.WebUI.DTOs
+﻿namespace AkademiPlusMicroService.WebUI.DTOs.ProductDtos
 {
 	public class CreateRegisterRequest
 	{

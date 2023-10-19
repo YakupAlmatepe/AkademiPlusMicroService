@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Abstract\" />
+    <ProjectReference Include="..\..\Services\Catalog\AkademiPusMicroservice.Catalog\AkademiPusMicroservice.Catalog.csproj" />
+    <ProjectReference Include="..\..\Sharedd\AkademiPlusMicroService.Sharedd\AkademiPlusMicroService.Sharedd.csproj" />
   </ItemGroup>
 
 </Project>

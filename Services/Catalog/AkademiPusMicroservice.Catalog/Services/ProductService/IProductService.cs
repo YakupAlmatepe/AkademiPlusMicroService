@@ -1,4 +1,5 @@
-﻿using AkademiPlusMicroService.Shared.Dtos;
+﻿
+using AkademiPlusMicroService.Sharedd.DTOs;
 using AkademiPusMicroservice.Catalog.DTOs.CategoryDtos;
 using AkademiPusMicroservice.Catalog.DTOs.ProductDtos;
 
